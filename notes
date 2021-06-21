@@ -1,0 +1,29 @@
+nest generate controller authentication
+
+1. class (cl)
+2. controller (co)
+3. decorator (d)
+4. exception (e)
+5. filter (f)
+6. gateway (ga)
+7. guard (gu)
+8. interceptor (i)
+9. middleware (mi)
+10. module (mo)
+11. pipe (pi)
+12. provider (pr)
+13. service (s)
+
+middleware
+  - A function that is run before a request is passed to the route handler.
+  - middleware ada macam2 = interceptor, pipe, guard
+  - Interceptor: same like middleware but have 2 method, after & before executed
+  - pipe: same like interceptor, untuk transform output format API
+  - guard: untuk validasi request perlu di handle controller atau enggk
+  - urutannya: MIDDLEWARE -> GUARD -> PIPES
+
+controllers
+  - handling incoming request & returning response to client
+
+providers
+  - service, factories, helpers, etc yang bisa di inject ke controller atau provider lain
