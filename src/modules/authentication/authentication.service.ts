@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken'
+import { UserService } from '../user/user.service';
 
 
 @Injectable()
 export class AuthenticationService {
   constructor(
-    // private readonly userService: UserService
+    private readonly userService: UserService
   ) {}
 
   createToken(email: string, ttl?: string) { // ttl => time to live

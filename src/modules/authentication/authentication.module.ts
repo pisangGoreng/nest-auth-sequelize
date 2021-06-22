@@ -2,7 +2,6 @@ import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { DynamicModule, Module } from '@nestjs/common';
 import { UserModule } from '../user/user.module';
-
 @Module({})
 export class AuthenticationModule {
     static forRoot(strategy?: 'jwt'): DynamicModule {

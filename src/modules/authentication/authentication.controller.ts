@@ -1,15 +1,16 @@
 import * as crypto from 'crypto';
 import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
+import { UserService } from '../user/user.service';
 
 @Controller('authentication')
 export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,
-    // private readonly userService: UserService
+    private readonly userService: UserService
   ) {}
 
-  @Post('login')
+  @Post('/login')
   @HttpCode(HttpStatus.OK)
   public async login(
     @Body() body:any,

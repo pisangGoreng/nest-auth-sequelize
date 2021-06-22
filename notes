@@ -1,4 +1,4 @@
-nest generate controller authentication
+nest generate controller user --path ./src/modules/user
 
 1. class (cl)
 2. controller (co)
