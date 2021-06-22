@@ -23,8 +23,6 @@ export const databaseProvider = {
                   }};
         }
 
-        console.log(config)
-
         const sequelize = new Sequelize(config);
         sequelize
             .authenticate()

@@ -1,28 +1,29 @@
 import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { SequelizeModule } from '@nestjs/sequelize';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+/*  Module */
 import { AuthenticationModule } from './modules/authentication/authentication.module';
-import { AuthenticationController } from './modules/authentication/authentication.controller';
 import { UserModule } from './modules/user/user.module';
-import { UserService } from './modules/user/user.service';
-import { AuthenticationService } from './modules/authentication/authentication.service';
 import { DatabaseModule } from './modules/database/database.module'
+
+/*  Controller */
+import { AppController } from './app.controller';
+import { AuthenticationController } from './modules/authentication/authentication.controller';
+
+/*  Service */
+import { AppService } from './app.service';
+import { AuthenticationService } from './modules/authentication/authentication.service';
+
+
 @Module({
   imports: [
-    // SequelizeModule.forRoot({
-    //   autoLoadModels: true,
-    //   synchronize: true,
-    // }),
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
-    AuthenticationModule.forRoot('jwt'),
+    AuthenticationModule,
     UserModule
   ],
-  controllers: [AppController, AuthenticationController],
-  providers: [AppService, AuthenticationService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {

@@ -1,28 +1,23 @@
 import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { DynamicModule, Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
-@Module({})
-export class AuthenticationModule {
-    static forRoot(strategy?: 'jwt'): DynamicModule {
-        strategy = strategy ? strategy : 'jwt';
-        const strategyProvider = {
-            provide: 'Strategy',
-            useFactory: async (
-                authenticationService: AuthenticationService
-            ) => {
-                const Strategy = (await import(`./passports/${strategy}.strategy`))
-                    .default;
-                return new Strategy(authenticationService);
-            },
-            inject: [AuthenticationService]
-        };
-        return {
-            module: AuthenticationModule,
-            imports: [UserModule],
-            controllers: [AuthenticationController],
-            providers: [AuthenticationService, strategyProvider],
-            exports: [strategyProvider]
-        };
-    }
-}
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './passports/jwt.strategy';
+import { LocalStrategy } from './passports/local.strategy';
+@Module({
+    // module: AuthenticationModule,
+    imports: [
+        UserModule,
+        PassportModule,
+        JwtModule.register({
+            secret: 'secret',
+            signOptions: { expiresIn: '6000s' },
+          }),
+    ],
+    providers: [AuthenticationService, JwtStrategy, LocalStrategy],
+    controllers: [AuthenticationController],
+    exports: [AuthenticationService, JwtModule]
+})
+export class AuthenticationModule {}
