@@ -1,4 +1,7 @@
 import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { SequelizeModule } from '@nestjs/sequelize';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
@@ -9,12 +12,17 @@ import { AuthenticationService } from './modules/authentication/authentication.s
 import { DatabaseModule } from './modules/database/database.module'
 @Module({
   imports: [
+    // SequelizeModule.forRoot({
+    //   autoLoadModels: true,
+    //   synchronize: true,
+    // }),
+    ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
     AuthenticationModule.forRoot('jwt'),
     UserModule
   ],
   controllers: [AppController, AuthenticationController],
-  providers: [AppService, UserService, AuthenticationService],
+  providers: [AppService, AuthenticationService],
 })
 export class AppModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {

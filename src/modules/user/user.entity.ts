@@ -23,7 +23,7 @@ import {
 export class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.BIGINT)
+  @Column(DataType.INTEGER)
   public id: number;
 
   @Column({

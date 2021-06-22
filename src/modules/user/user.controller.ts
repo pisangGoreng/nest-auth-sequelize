@@ -16,10 +16,11 @@ export class UserController {
 
   @Get(':id')
   // @UseGuards(CheckLoggedInUserGuard)
-  public async show(@Param() id: number, @Res() res) {
-    if (!id) throw new Error('Missing id.');
+  public async show(@Param() param, @Res() res) {
+    if (!param.id) throw new Error('Missing id.');
 
-    const user = await this.userService.findById(id);
+    const userId = Number(param.id)
+    const user = await this.userService.findById(userId);
     return res.status(HttpStatus.OK).json(user);
   }
 
@@ -33,17 +34,21 @@ export class UserController {
 
   @Put(':id')
   // @UseGuards(CheckLoggedInUserGuard)
-  public async update(@Param() id: number, @Body() body, @Res() res) {
-    if (!id) throw new Error('Missing id.');
-    await this.userService.update(id, body);
+  public async update(@Param() param, @Body() body, @Res() res) {
+    if (!param.id) throw new Error('Missing id.');
+
+    const userId = Number(param.id)
+    await this.userService.update(userId, body);
     return res.status(HttpStatus.OK).send();
   }
 
   @Delete(':id')
   // @UseGuards(CheckLoggedInUserGuard)
-  public async delete(@Param() id: number, @Res() res) {
-    if (!id) throw new Error('Missing id.');
-    await this.userService.delete(id);
+  public async delete(@Param() param, @Res() res) {
+    if (!param.id) throw new Error('Missing id.');
+
+    const userId = Number(param.id)
+    await this.userService.delete(userId);
     return res.status(HttpStatus.OK).send();
   }
 }

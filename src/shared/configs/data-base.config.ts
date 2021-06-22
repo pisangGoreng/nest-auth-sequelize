@@ -9,7 +9,7 @@ export const databaseConfig: IDatabaseConfig = {
         port: Number(process.env.POSTGRES_PORT) || 5432,
         dialect: 'postgres',
         logging: false,
-        force: true,
-        timezone: '+02:00'
+        force: false,
+        timezone: '+07:00'
     }
 };

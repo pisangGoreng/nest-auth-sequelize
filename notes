@@ -27,3 +27,7 @@ controllers
 
 providers
   - service, factories, helpers, etc yang bisa di inject ke controller atau provider lain
+
+
+transactions
+  - make this operation to transaction. Avoid reading data before everything is finished

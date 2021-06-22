@@ -6,7 +6,7 @@ import { databaseConfig } from '../../shared/configs/data-base.config';
 import { User } from '../user/user.entity';
 
 export const databaseProvider = {
-    provide: 'SequelizeInstance',
+    provide: 'SequelizeInstance', // nama instance sequelize nanti
     useFactory: async () => {
         let config;
         switch (process.env.NODE_ENV) {
@@ -22,6 +22,8 @@ export const databaseProvider = {
                     }
                   }};
         }
+
+        console.log(config)
 
         const sequelize = new Sequelize(config);
         sequelize
